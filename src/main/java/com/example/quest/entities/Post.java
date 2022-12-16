@@ -20,7 +20,7 @@ public class Post {
     @JsonIgnore
     User user;
 
-    Long title;
+    String title;
     @Lob
     @Column(columnDefinition = "text")
     String text;
