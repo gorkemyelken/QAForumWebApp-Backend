@@ -5,7 +5,6 @@ import com.example.quest.entities.Post;
 import com.example.quest.entities.User;
 import com.example.quest.repositories.LikeRepository;
 import com.example.quest.requests.LikeCreateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
