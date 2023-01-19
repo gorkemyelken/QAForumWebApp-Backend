@@ -6,6 +6,7 @@ import com.example.quest.entities.User;
 import com.example.quest.requests.CommentCreateRequest;
 import com.example.quest.requests.CommentUpdateRequest;
 import com.example.quest.services.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentController {
     private CommentService commentService;
-
+    @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }

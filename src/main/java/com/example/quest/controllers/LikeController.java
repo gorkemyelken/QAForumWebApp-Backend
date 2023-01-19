@@ -2,7 +2,9 @@ package com.example.quest.controllers;
 
 import com.example.quest.entities.Like;
 import com.example.quest.requests.LikeCreateRequest;
+import com.example.quest.responses.LikeResponse;
 import com.example.quest.services.LikeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,14 +14,14 @@ import java.util.Optional;
 @RequestMapping("/likes")
 public class LikeController {
     private LikeService likeService;
-
+    @Autowired
     public LikeController(LikeService likeService) {
         this.likeService = likeService;
     }
 
     @GetMapping
-    public List<Like> getAllLikes(@RequestParam Optional<Long> userId,
-                                  @RequestParam Optional<Long> postId) {
+    public List<LikeResponse> getAllLikes(@RequestParam Optional<Long> userId,
+                                          @RequestParam Optional<Long> postId) {
         return likeService.getAllLikesWithParam(userId, postId);
     }
 

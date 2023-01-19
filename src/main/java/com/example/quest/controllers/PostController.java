@@ -5,6 +5,7 @@ import com.example.quest.requests.PostCreateRequest;
 import com.example.quest.requests.PostUpdateRequest;
 import com.example.quest.responses.PostResponse;
 import com.example.quest.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
     private PostService postService;
-
+    @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
