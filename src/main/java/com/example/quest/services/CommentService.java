@@ -9,14 +9,15 @@ import com.example.quest.requests.CommentUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CommentService {
-    private CommentRepository commentRepository;
-    private UserService userService;
-    private PostService postService;
+    private final CommentRepository commentRepository;
+    private final UserService userService;
+    private final PostService postService;
     @Autowired
     public CommentService(CommentRepository commentRepository, UserService userService, PostService postService) {
         this.commentRepository = commentRepository;
@@ -48,6 +49,7 @@ public class CommentService {
             commentToSave.setText(commentCreateRequest.getText());
             commentToSave.setUser(user);
             commentToSave.setPost(post);
+            commentToSave.setCreateDate(new Date());
             return commentRepository.save(commentToSave);
         }
         else return null;

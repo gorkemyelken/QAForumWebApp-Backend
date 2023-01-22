@@ -2,7 +2,6 @@ package com.example.quest.services;
 
 import com.example.quest.entities.Post;
 import com.example.quest.entities.User;
-import com.example.quest.entities.Like;
 import com.example.quest.repositories.PostRepository;
 import com.example.quest.requests.PostCreateRequest;
 import com.example.quest.requests.PostUpdateRequest;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,9 +39,13 @@ public class PostService {
     }
 
     public Post getOnePostById(Long postId) {
-        return this.postRepository.findById(postId).orElse(null);
+        return postRepository.findById(postId).orElse(null);
     }
-
+    public PostResponse getOnePostByIdWithLikes(Long postId) {
+        Post post = this.postRepository.findById(postId).orElse(null);
+        List<LikeResponse> likes = likeService.getAllLikesWithParam(Optional.ofNullable(null),Optional.of(postId));
+        return new PostResponse(post, likes);
+    }
     public Post createOnePost(PostCreateRequest newPostRequest) {
         User user = userService.getOneUser(newPostRequest.getUserId());
         if(user==null)
@@ -51,6 +55,7 @@ public class PostService {
         toSave.setText(newPostRequest.getText());
         toSave.setTitle(newPostRequest.getTitle());
         toSave.setUser(user);
+        toSave.setCreateDate(new Date());
         return postRepository.save(toSave);
     }
 
