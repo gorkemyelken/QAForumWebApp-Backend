@@ -5,7 +5,6 @@ import com.example.quest.entities.Post;
 import com.example.quest.entities.User;
 import com.example.quest.requests.CommentCreateRequest;
 import com.example.quest.requests.CommentUpdateRequest;
-import com.example.quest.responses.CommentResponse;
 import com.example.quest.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class CommentController {
     }
 
     @GetMapping
-    public List<CommentResponse> getAllCommentsWithParams(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> postId){
+    public List<Comment> getAllCommentsWithParams(@RequestParam Optional<Long> userId,@RequestParam Optional<Long> postId){
         return this.commentService.getAllCommentsWithParams(userId,postId);
     }
 

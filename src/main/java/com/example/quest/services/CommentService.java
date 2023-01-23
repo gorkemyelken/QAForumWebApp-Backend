@@ -6,14 +6,12 @@ import com.example.quest.entities.User;
 import com.example.quest.repositories.CommentRepository;
 import com.example.quest.requests.CommentCreateRequest;
 import com.example.quest.requests.CommentUpdateRequest;
-import com.example.quest.responses.CommentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -27,17 +25,15 @@ public class CommentService {
         this.postService = postService;
     }
 
-    public List<CommentResponse> getAllCommentsWithParams(Optional<Long> userId, Optional<Long> postId){
-        List<Comment> comments;
+    public List<Comment> getAllCommentsWithParams(Optional<Long> userId, Optional<Long> postId){
         if(userId.isPresent() && postId.isPresent()) {
-            comments = commentRepository.findByUserIdAndPostId(userId.get(), postId.get());
+            return commentRepository.findByUserIdAndPostId(userId.get(), postId.get());
         }else if(userId.isPresent()) {
-            comments = commentRepository.findByUserId(userId.get());
+            return commentRepository.findByUserId(userId.get());
         }else if(postId.isPresent()) {
-            comments = commentRepository.findByPostId(postId.get());
+            return commentRepository.findByPostId(postId.get());
         }else
-            comments = commentRepository.findAll();
-        return comments.stream().map(comment -> new CommentResponse(comment)).collect(Collectors.toList());
+            return commentRepository.findAll();
     }
 
     public Comment getOneCommentById(Long commentId){
