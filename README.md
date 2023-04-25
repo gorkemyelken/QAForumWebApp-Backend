@@ -28,7 +28,7 @@ Technologies used in the project:
 *   User: The user object that is used to store the data of each individual user/administrator of the forum. 
 *   Post: The post object, once created and can be commented or liked by other user objects.
 *   Comment: The comment object that used to store the data of each comment to a post.
-*   Like: The like object that used to store the data of each comment to a post.
+*   Like: The like object that used to store the data of each like to a post.
 
 <h2>🔧 Controllers</h2>
 
